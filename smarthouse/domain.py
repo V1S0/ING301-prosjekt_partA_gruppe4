@@ -29,7 +29,8 @@ class SmartHouse:
     
     floors = []
     rooms = []
-    devices = []
+    devices = {}
+    deviceTypes = {}
 
 
     def register_floor(self, level):#funker
@@ -93,6 +94,12 @@ class SmartHouse:
         This methods registers a given device in a given room.
         """
         SmartHouse.devices.append(room, device)
+    
+    def register_deviceType(self, ID, Manufacturer,model, devicetype, nickname):
+        """
+        This methods registers a given device in a given room.
+        """
+        SmartHouse.deviceTypes.append(ID, Manufacturer,model, devicetype, nickname)
 
     
     def get_device(self, device_id):
@@ -131,13 +138,13 @@ class room:
         pass
 
 class device:
-    def __init__(self, ID:int, manufacturer:str, model:str, deviceType:str, nickname:str) -> None:
+    def __init__(self, ID:str, manufacturer:str, model:str, deviceType:str, nickname:str) -> None:
         self.ID = ID
         self.manufacturer = manufacturer
         self.model = model
         self.deviceType = deviceType
         self.nickname = nickname
-        pass
+        
 
 class actuator(device):
     def __init__(self, ID: int, manufacturer: str, model: str, deviceType: str, nickname: str, state) -> None:
@@ -167,8 +174,7 @@ class sensor(device):
         
 
 
-    
-    
+
         
 
     

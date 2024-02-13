@@ -1,6 +1,8 @@
 from smarthouse.domain import SmartHouse
 
+
 DEMO_HOUSE = SmartHouse()
+
 
 # Building house structure
 ground_floor = DEMO_HOUSE.register_floor(1)
@@ -21,6 +23,11 @@ Masterbedroom = DEMO_HOUSE.register_room(first_floor, 17.0, "Master bedroom")
 
 #devices
 
-SmartLock = DEMO_HOUSE.register_device(entrance, )
+
+test = DEMO_HOUSE.register_deviceType("cd5be4e8-0e6b-4cb5-a21f-819d06cf5fc5", "NebulaGuard Innovations", "MoveZ Detect 69", "Motion Sensor", "Motion sensor")
+motion_sensor = DEMO_HOUSE.register_device(LivingRoomKitchen, test)
+
+#smartlock = device("4d5f1ac6-906a-4fd1-b4bf-3a0671e4c4f1", "MythicalTech", "Guardian Lock 7000", "actuator", "Smart lock" )
+#SmartLock = DEMO_HOUSE.register_device(entrance, smartlock )
 # TODO: continue registering the remaining floor, rooms and devices
 
