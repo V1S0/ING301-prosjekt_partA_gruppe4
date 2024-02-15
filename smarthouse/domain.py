@@ -29,7 +29,7 @@ class SmartHouse:
     
     floors = []
     rooms = []
-    devices = {}
+    devices = {"Room":[],"Device":[]}
     deviceTypes = {}
 
 
@@ -93,7 +93,11 @@ class SmartHouse:
         """
         This methods registers a given device in a given room.
         """
-        SmartHouse.devices.append(room, device)
+        #SmartHouse.devices.append(room, device)
+        
+        SmartHouse.devices["Room"].append(room)
+        SmartHouse.devices["Device"].append(device)
+
     
     def register_deviceType(self, ID, Manufacturer,model, devicetype, nickname):
         """
@@ -101,8 +105,12 @@ class SmartHouse:
         """
         SmartHouse.deviceTypes.append(ID, Manufacturer,model, devicetype, nickname)
 
+
+    def get_devices(self):
+        numDevice = (SmartHouse.devices)
+        return numDevice
     
-    def get_device(self, device_id):
+    def get_device_by_id(self, device_id):
         """
         This method retrieves a device object via its id.
         """
