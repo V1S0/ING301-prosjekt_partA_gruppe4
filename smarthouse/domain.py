@@ -23,9 +23,9 @@ class SmartHouse:
     The SmartHouse class provides functionality to register rooms and floors (i.e. changing the 
     house's physical layout) as well as register and modify smart devices and their state.
     """
-        #def __init__(self,floors:[],rooms:[]) -> None:
-       # self.floors = floors
-        #self.rooms = rooms
+    #def __init__(self,floors:[],rooms:[]) -> None:
+    # self.floors = floors
+    #self.rooms = rooms
     
     floors = []
     rooms = []
@@ -41,7 +41,7 @@ class SmartHouse:
         SmartHouse.floors.append(floor(level))
         return SmartHouse.floors[-1] 
 
-    def register_room(self, floor, room_size, room_name = None):#funker
+    def register_room(self, floor, room_size, room_name):#funker
         """
         This methods registers a new room with the given room areal size 
         at the given floor. Optionally the room may be assigned a mnemonic name.
@@ -57,10 +57,12 @@ class SmartHouse:
         registered a basement (level=0), a ground floor (level=1) and a first floor 
         (leve=1), then the resulting list contains these three flors in the above order.
         """
-        sorted_floors = SmartHouse.floors.sort()
+        #tror sort sorterer listen og returnere none. dermed trenger den ikke å få en variabel
+        #sorted_floors = SmartHouse.floors.sort()
+        SmartHouse.floors.sort()
 
-        return sorted_floors
 
+        return SmartHouse.floors
 
     def get_rooms(self):#funker
         """
@@ -99,26 +101,42 @@ class SmartHouse:
         SmartHouse.devices["Device"].append(device)
 
     
-    def register_deviceType(self, ID, Manufacturer,model, devicetype, nickname):
+    #def register_deviceType(self, ID, Manufacturer,model, devicetype, nickname):
         """
         This methods registers a given device in a given room.
         """
-        SmartHouse.deviceTypes.append(ID, Manufacturer,model, devicetype, nickname)
+        #SmartHouse.deviceTypes.append(ID, Manufacturer,model, devicetype, nickname)
 
 
     def get_devices(self):
         numDevice = (SmartHouse.devices)
         return numDevice
     
+
+
     def get_device_by_id(self, device_id):
-        """
-        This method retrieves a device object via its id.
-        """
-        for noe in SmartHouse.devices:
-            if noe.device.device_id == device_id:
-                return noe.device
-            else:
-                return print("ingen enheter med denne id")
+        # Gå gjennom hver enhet i listen 'Device'
+        for device_tuple in self.devices["Device"]:
+            # Anta at enhetens ID er det første elementet i tuple
+            # Dette er bare et eksempel, juster indeksen etter din faktiske datastruktur
+            if device_tuple[0] == device_id:  # Juster dette hvis strukturen er annerledes
+                # Returner enheten hvis ID-en matcher
+                return device_tuple[0]  # Juster dette også om nødvendig
+
+        # Returner None hvis ingen enhet med gitt ID ble funnet
+        return None
+
+
+    
+   # def get_device_by_id(self, device_id):
+    #    """
+     #   This method retrieves a device object via its id.
+      #  """
+       # for noe in SmartHouse.devices:
+        #    if noe.device.device_id == device_id:
+         #       return noe.device
+          #  else:
+           #     return print("ingen enheter med denne id")
 
 
 
@@ -136,18 +154,18 @@ class floor:
 
     #def calculateArea(self, SmartHouse.rooms):
         
-        pass
+        
 
 class room:
     def __init__(self, name : str, area:float, floor:int) -> None:
         self.name = name
         self.area = area
         self.floor = floor
-        pass
+       
 
 class device:
-    def __init__(self, ID:str, manufacturer:str, model:str, deviceType:str, nickname:str) -> None:
-        self.ID = ID
+    def __init__(self, id:str, manufacturer:str, model:str, deviceType:str, nickname:str) -> None:
+        self.ID = id
         self.manufacturer = manufacturer
         self.model = model
         self.deviceType = deviceType
@@ -155,16 +173,16 @@ class device:
         
 
 class actuator(device):
-    def __init__(self, ID: int, manufacturer: str, model: str, deviceType: str, nickname: str, state) -> None:
-        super().__init__(ID, manufacturer, model, deviceType, nickname)
+    def __init__(self, id: str, manufacturer: str, model: str, deviceType: str, nickname: str, state) -> None:
+        super().__init__(id, manufacturer, model, deviceType, nickname)
         self.state = state
     def changeState(newState):
         #.......
         pass
 
 class sensor(device):
-    def __init__(self, ID: int, manufacturer: str, model: str, deviceType: str, nickname: str) -> None:
-        super().__init__(ID, manufacturer, model, deviceType, nickname)
+    def __init__(self, id: str, manufacturer: str, model: str, deviceType: str, nickname: str) -> None:
+        super().__init__(id, manufacturer, model, deviceType, nickname)
         self.measurements = []  # Lager for å holde målinger
 
     def getCurrentValue(self):

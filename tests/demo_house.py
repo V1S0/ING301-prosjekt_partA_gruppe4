@@ -25,7 +25,7 @@ Masterbedroom = DEMO_HOUSE.register_room(first_floor, 17.0, "Master bedroom")
 
 #test = DEMO_HOUSE.register_deviceType("cd5be4e8-0e6b-4cb5-a21f-819d06cf5fc5", "NebulaGuard Innovations", "MoveZ Detect 69", "Motion Sensor", "Motion sensor")
 
-motion_sensor = ("cd5be4e8-0e6b-4cb5-a21f-819d06cf5fc5", "NebulaGuard Innovations", "MoveZ Detect 69", "Motion Sensor", "Motion sensor")
+motion_sensor = ("9e5b8274-4e77-4e8e-80d2-b40d648ea04b", "NebulaGuard Innovations", "MoveZ Detect 69", "Motion Sensor", "Motion sensor")
 Motion_Sensor = DEMO_HOUSE.register_device(LivingRoomKitchen, motion_sensor)
 
 smartlock = ("4d5f1ac6-906a-4fd1-b4bf-3a0671e4c4f1", "MythicalTech", "Guardian Lock 7000", "actuator", "Smart lock" )
