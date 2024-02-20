@@ -29,8 +29,9 @@ class SmartHouse:
     
     floors = []
     rooms = []
-    devices = {"Room":[],"Device":[]}
-    deviceTypes = {}
+    #devices = {"Room":[],"Device":[]}
+    devices = []
+    #deviceTypes = {}
 
 
     def register_floor(self, level):#funker
@@ -46,7 +47,8 @@ class SmartHouse:
         This methods registers a new room with the given room areal size 
         at the given floor. Optionally the room may be assigned a mnemonic name.
         """
-        SmartHouse.rooms.append(room(room_name,room_size,floor))
+        devices = []
+        SmartHouse.rooms.append(room(room_name,room_size,floor, devices))
  
 
 
@@ -76,10 +78,7 @@ class SmartHouse:
     def get_area(self):#funker
         """
         This methods return the total area size of the house, i.e. the sum of the area sizes of each room in the house.
-        """
-        
-
-
+        """ 
         allRooms = SmartHouse.get_rooms(self)
 
         allArea = []
@@ -96,9 +95,11 @@ class SmartHouse:
         This methods registers a given device in a given room.
         """
         #SmartHouse.devices.append(room, device)
+        SmartHouse.devices.append(device)
+        room.devices.append(device) ###fiiiiikskskssk
 
-        SmartHouse.devices["Room"].append(room)
-        SmartHouse.devices["Device"].append(device)
+        #SmartHouse.devices["Room"].append(room)
+        #SmartHouse.devices["Device"].append(device)
 
     
     #def register_deviceType(self, ID, Manufacturer,model, devicetype, nickname):
@@ -117,11 +118,9 @@ class SmartHouse:
     def get_device_by_id(self, device_id):
         # Gå gjennom hver enhet i listen 'Device'
         for device in self.devices["Device"]:
-            # Anta at enhetens ID er det første elementet i tuple
-            # Dette er bare et eksempel, juster indeksen etter din faktiske datastruktur
-            if device[0] == device_id:  # Juster dette hvis strukturen er annerledes
+            if device.ID == device_id:  # Juster dette hvis strukturen er annerledes
                 # Returner enheten hvis ID-en matcher
-                return device[0]  # Juster dette også om nødvendig
+                return device 
 
         # Returner None hvis ingen enhet med gitt ID ble funnet
         return None
@@ -157,10 +156,14 @@ class floor:
         
 
 class room:
-    def __init__(self, name : str, area:float, floor:int) -> None:
+    def __init__(self, name : str, area:float, floor:int, devices) -> None:
         self.name = name
         self.area = area
         self.floor = floor
+        self.devices = []
+        #listname = "devices_in_"+ name
+        #listname[]
+
        
 
 class Device:

@@ -28,14 +28,14 @@ Masterbedroom = DEMO_HOUSE.register_room(first_floor, 17.0, "Master bedroom")
 motion_sensor = Device("9e5b8274-4e77-4e8e-80d2-b40d648ea04b", "NebulaGuard Innovations", "MoveZ Detect 69", "Motion Sensor", "Motion sensor")
 DEMO_HOUSE.register_device(LivingRoomKitchen, motion_sensor)
 
-smartlock = ("4d5f1ac6-906a-4fd1-b4bf-3a0671e4c4f1", "MythicalTech", "Guardian Lock 7000", "actuator", "Smart lock" )
-SmartLock = DEMO_HOUSE.register_device(entrance, smartlock)
+smartlock = Device("4d5f1ac6-906a-4fd1-b4bf-3a0671e4c4f1", "MythicalTech", "Guardian Lock 7000", "actuator", "Smart lock" )
+DEMO_HOUSE.register_device(entrance, smartlock)
 
-c02_sensor = ("8a43b2d7-e8d3-4f3d-b832-7dbf37bf629e", "ElysianTech", "Smoke Warden 1000","CO2 sensor","CO2 sensor" )
-CO2_Sensor = DEMO_HOUSE.register_device(LivingRoomKitchen, c02_sensor)
+c02_sensor = Device("8a43b2d7-e8d3-4f3d-b832-7dbf37bf629e", "ElysianTech", "Smoke Warden 1000","CO2 sensor","CO2 sensor" )
+DEMO_HOUSE.register_device(LivingRoomKitchen, c02_sensor)
 
-electricity_meter= ("a2f8690f-2b3a-43cd-90b8-9deea98b42a7", "MysticEnergy Innovations", "Volt Watch Elite","Electricity Meter","Electricity Meter	" )
-Electricity_Meter = DEMO_HOUSE.register_device(LivingRoomKitchen, c02_sensor)
+electricity_meter= Device("a2f8690f-2b3a-43cd-90b8-9deea98b42a7", "MysticEnergy Innovations", "Volt Watch Elite","Electricity Meter","Electricity Meter	" )
+DEMO_HOUSE.register_device(LivingRoomKitchen, c02_sensor)
 
 
 
