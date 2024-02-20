@@ -26,11 +26,12 @@ class SmartHouse:
     #def __init__(self,floors:[],rooms:[]) -> None:
     # self.floors = floors
     #self.rooms = rooms
-    
-    floors = []
-    rooms = []
+    def __init__(self):
+
+        self.floors = []
+        self.rooms = []
     #devices = {"Room":[],"Device":[]}
-    devices = []
+        self.devices = []
     #deviceTypes = {}
 
 
@@ -39,8 +40,8 @@ class SmartHouse:
         This method registers a new floor at the given level in the house
         and returns the respective floor object.
         """
-        SmartHouse.floors.append(floor(level))
-        return SmartHouse.floors[-1] 
+        self.floors.append(floor(level))
+        return self.floors[-1] 
 
     def register_room(self, floor, room_size, room_name):#funker
         """
@@ -49,7 +50,7 @@ class SmartHouse:
         """
         devices = []
         r = room(room_name,room_size,floor, devices)
-        SmartHouse.rooms.append(r)
+        self.rooms.append(r)
         return r
 
 
@@ -62,10 +63,10 @@ class SmartHouse:
         """
         #tror sort sorterer listen og returnere none. dermed trenger den ikke å få en variabel
         #sorted_floors = SmartHouse.floors.sort()
-        SmartHouse.floors.sort()
+        self.floors.sort()
 
 
-        return SmartHouse.floors
+        return self.floors
 
     def get_rooms(self):#funker
         """
@@ -73,7 +74,7 @@ class SmartHouse:
         The resulting list has no particular order.
         """
 
-        return SmartHouse.rooms
+        return self.rooms
 
 
     def get_area(self):#funker
@@ -96,7 +97,7 @@ class SmartHouse:
         This methods registers a given device in a given room.
         """
         #SmartHouse.devices.append(room, device)
-        SmartHouse.devices.append(device)
+        self.devices.append(device)
         room.devices.append(device) ###fiiiiikskskssk
 
         #SmartHouse.devices["Room"].append(room)
@@ -111,7 +112,7 @@ class SmartHouse:
 
 
     def get_devices(self):
-        numDevice = (SmartHouse.devices)
+        numDevice = (self.devices)
         return numDevice
     
 
@@ -157,7 +158,7 @@ class building:
         
 
 class floor:
-    def __init__(self,floorNumber : int, ) -> None:
+    def __init__(self,floorNumber : int, ):
         self.floorNumber = floorNumber
 
     #def calculateArea(self, SmartHouse.rooms):
@@ -165,7 +166,7 @@ class floor:
         
 
 class room:
-    def __init__(self, name : str, area:float, floor:int, devices) -> None:
+    def __init__(self, name : str, area:float, floor:int, devices):
         self.name = name
         self.area = area
         self.floor = floor
@@ -176,7 +177,7 @@ class room:
        
 
 class Device:
-    def __init__(self, id:str, manufacturer:str, model:str, deviceType:str, nickname:str) -> None:
+    def __init__(self, id:str, manufacturer:str, model:str, deviceType:str, nickname:str):
         self.id = id
         self.manufacturer = manufacturer
         self.model = model
@@ -185,7 +186,7 @@ class Device:
         
 
 class actuator(Device):
-    def __init__(self, id: str, manufacturer: str, model: str, deviceType: str, nickname: str, state) -> None:
+    def __init__(self, id: str, manufacturer: str, model: str, deviceType: str, nickname: str, state):
         super().__init__(id, manufacturer, model, deviceType, nickname)
         self.state = state
     def changeState(newState):
@@ -193,7 +194,7 @@ class actuator(Device):
         pass
 
 class sensor(Device):
-    def __init__(self, id: str, manufacturer: str, model: str, deviceType: str, nickname: str) -> None:
+    def __init__(self, id: str, manufacturer: str, model: str, deviceType: str, nickname: str):
         super().__init__(id, manufacturer, model, deviceType, nickname)
         self.measurements = []  # Lager for å holde målinger
 
