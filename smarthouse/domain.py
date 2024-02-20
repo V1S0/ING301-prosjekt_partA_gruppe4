@@ -48,8 +48,9 @@ class SmartHouse:
         at the given floor. Optionally the room may be assigned a mnemonic name.
         """
         devices = []
-        SmartHouse.rooms.append(room(room_name,room_size,floor, devices))
- 
+        r = room(room_name,room_size,floor, devices)
+        SmartHouse.rooms.append(r)
+        return r
 
 
     def get_floors(self):#funker
@@ -117,13 +118,21 @@ class SmartHouse:
 
     def get_device_by_id(self, device_id):
         # Gå gjennom hver enhet i listen 'Device'
-        for device in self.devices["Device"]:
-            if device.ID == device_id:  # Juster dette hvis strukturen er annerledes
-                # Returner enheten hvis ID-en matcher
-                return device 
 
-        # Returner None hvis ingen enhet med gitt ID ble funnet
-        return None
+        for room in self.rooms:
+            for device in room.devices:
+                if device.ID == device_id:
+                    return device 
+                
+
+
+#for device in self.devices[]:
+#    if device.ID == device_id:  # Juster dette hvis strukturen er annerledes
+        # Returner enheten hvis ID-en matcher
+#        return device 
+
+# Returner None hvis ingen enhet med gitt ID ble funnet
+# return None
 
 
     
@@ -168,7 +177,7 @@ class room:
 
 class Device:
     def __init__(self, id:str, manufacturer:str, model:str, deviceType:str, nickname:str) -> None:
-        self.ID = id
+        self.id = id
         self.manufacturer = manufacturer
         self.model = model
         self.deviceType = deviceType
