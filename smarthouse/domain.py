@@ -96,7 +96,7 @@ class SmartHouse:
         This methods registers a given device in a given room.
         """
         #SmartHouse.devices.append(room, device)
-        
+
         SmartHouse.devices["Room"].append(room)
         SmartHouse.devices["Device"].append(device)
 
@@ -116,12 +116,12 @@ class SmartHouse:
 
     def get_device_by_id(self, device_id):
         # Gå gjennom hver enhet i listen 'Device'
-        for device_tuple in self.devices["Device"]:
+        for device in self.devices["Device"]:
             # Anta at enhetens ID er det første elementet i tuple
             # Dette er bare et eksempel, juster indeksen etter din faktiske datastruktur
-            if device_tuple[0] == device_id:  # Juster dette hvis strukturen er annerledes
+            if device[0] == device_id:  # Juster dette hvis strukturen er annerledes
                 # Returner enheten hvis ID-en matcher
-                return device_tuple[0]  # Juster dette også om nødvendig
+                return device[0]  # Juster dette også om nødvendig
 
         # Returner None hvis ingen enhet med gitt ID ble funnet
         return None
@@ -163,7 +163,7 @@ class room:
         self.floor = floor
        
 
-class device:
+class Device:
     def __init__(self, id:str, manufacturer:str, model:str, deviceType:str, nickname:str) -> None:
         self.ID = id
         self.manufacturer = manufacturer
@@ -172,7 +172,7 @@ class device:
         self.nickname = nickname
         
 
-class actuator(device):
+class actuator(Device):
     def __init__(self, id: str, manufacturer: str, model: str, deviceType: str, nickname: str, state) -> None:
         super().__init__(id, manufacturer, model, deviceType, nickname)
         self.state = state
@@ -180,7 +180,7 @@ class actuator(device):
         #.......
         pass
 
-class sensor(device):
+class sensor(Device):
     def __init__(self, id: str, manufacturer: str, model: str, deviceType: str, nickname: str) -> None:
         super().__init__(id, manufacturer, model, deviceType, nickname)
         self.measurements = []  # Lager for å holde målinger
