@@ -1,3 +1,8 @@
+from multiprocessing import Value
+from pickle import TRUE
+from typing import Optional
+
+
 class measurement:
     """
     This class represents a measurement taken from a sensor.
@@ -11,7 +16,7 @@ class measurement:
 
 
 
-# TODO: Add your own classes here!
+# TODO: Add your own classes here!d
 
 
 class SmartHouse:
@@ -104,11 +109,11 @@ class SmartHouse:
         #SmartHouse.devices["Device"].append(device)
 
     
-    #def register_deviceType(self, ID, Manufacturer,model, devicetype, nickname):
+    #def register_deviceType(self, ID, supplier,model_name, devicetype, nickname):
         """
         This methods registers a given device in a given room.
         """
-        #SmartHouse.deviceTypes.append(ID, Manufacturer,model, devicetype, nickname)
+        #SmartHouse.deviceTypes.append(ID, supplier,model_name, devicetype, nickname)
 
 
     def get_devices(self):
@@ -122,7 +127,7 @@ class SmartHouse:
 
         for room in self.rooms:
             for device in room.devices:
-                if device.ID == device_id:
+                if device.id == device_id:
                     return device 
                 
 
@@ -166,8 +171,8 @@ class floor:
         
 
 class room:
-    def __init__(self, name : str, area:float, floor:int, devices):
-        self.name = name
+    def __init__(self, room_name : str, area:float, floor:int, devices):
+        self.room_name = room_name
         self.area = area
         self.floor = floor
         self.devices = []
@@ -177,39 +182,67 @@ class room:
        
 
 class Device:
-    def __init__(self, id:str, manufacturer:str, model:str, deviceType:str, nickname:str):
+    def __init__(self, id:str, supplier:str, model_name:str, device_type:str, nickname:str, room):
         self.id = id
-        self.manufacturer = manufacturer
-        self.model = model
-        self.deviceType = deviceType
+        self.supplier = supplier
+        self.model_name = model_name
+        self.device_type = device_type
         self.nickname = nickname
+        self.room = room
         
 
 class actuator(Device):
-    def __init__(self, id: str, manufacturer: str, model: str, deviceType: str, nickname: str, state):
-        super().__init__(id, manufacturer, model, deviceType, nickname)
+    def __init__(self, id: str, supplier: str, model_name: str, device_type: str, nickname: str, room,  state:bool):
+        super().__init__(id, supplier, model_name, device_type, nickname, room)
         self.state = state
+        
+
+    def is_sensor(self):
+        return False
+    def is_actuator(self):
+        return True
     def changeState(newState):
         #.......
         pass
 
-class sensor(Device):
-    def __init__(self, id: str, manufacturer: str, model: str, deviceType: str, nickname: str):
-        super().__init__(id, manufacturer, model, deviceType, nickname)
-        self.measurements = []  # Lager for å holde målinger
-
-    def getCurrentValue(self):
-        
-        if self.measurements:
-            return self.measurements[-1].value
+    
+    def turn_on(self,value=None):
+        self.state = True
+        self.value = value
+        return self.state
+    
+    def is_active(self):
+        if self.state:
+            return True
         else:
-            return None
+            return False
         
-    def addMeasurement(self,measurement):
-        self.measurements.append(measurement)
+    def turn_off(self):
+        self.state = False
+        
+
+
+class sensor(Device):
+    def __init__(self, id: str, supplier: str, model_name: str, device_type: str, nickname: str, room, unit):
+        super().__init__(id, supplier, model_name, device_type, nickname, room)
+        self.measurements = [] # Lager for å holde målinger
+        self.unit = unit
+        
+
+    def last_measurement(self):
+        return self.measurements[-1]
+
+        
+    def addMeasurement(self,value,unit):
+
+        self.measurements.append(measurement("now",value, unit))
 
     def getHistory(self):
         return self.measurements
+    def is_sensor(self):
+        return TRUE
+    def is_actuator(self):
+        return False
         
 
 
