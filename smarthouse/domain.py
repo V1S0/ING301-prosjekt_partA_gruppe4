@@ -101,7 +101,22 @@ class SmartHouse:
         """
         This methods registers a given device in a given room.
         """
+        ##prøver å fjerne enheten om vi legger til en enhet som allerede finnes
+     
+        ##checking if the device exists
         #SmartHouse.devices.append(room, device)
+        for old in self.devices:
+            if old.id == device.id:
+                self.devices.remove(old)
+
+                return old
+            
+
+        
+        #room.devices.remove(device)
+        device.room = room
+        
+
         self.devices.append(device)
         room.devices.append(device) ###fiiiiikskskssk
 

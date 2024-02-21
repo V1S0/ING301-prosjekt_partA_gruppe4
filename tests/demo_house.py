@@ -17,7 +17,7 @@ guestRoom2 = DEMO_HOUSE.register_room(first_floor, 8.0, "Guest Room 2")
 Bathroom2 = DEMO_HOUSE.register_room(first_floor, 9.25, "Bathroom 2")
 Office = DEMO_HOUSE.register_room(first_floor, 11.75, "Office")
 guestRoom3 = DEMO_HOUSE.register_room(first_floor, 10.0, "Guest Room 3")
-DressingRoom = DEMO_HOUSE.register_room(first_floor, 4.0, "Dressing Room")
+DressingRoom = DEMO_HOUSE.register_room(first_floor, 4.0, "dressing Room")
 Masterbedroom = DEMO_HOUSE.register_room(first_floor, 17.0, "Master bedroom")
 
 #devices
