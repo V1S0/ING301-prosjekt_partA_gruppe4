@@ -17,13 +17,11 @@ guestRoom2 = DEMO_HOUSE.register_room(first_floor, 8.0, "Guest Room 2")
 Bathroom2 = DEMO_HOUSE.register_room(first_floor, 9.25, "Bathroom 2")
 Office = DEMO_HOUSE.register_room(first_floor, 11.75, "Office")
 guestRoom3 = DEMO_HOUSE.register_room(first_floor, 10.0, "Guest Room 3")
-DressingRoom = DEMO_HOUSE.register_room(first_floor, 4.0, "dressing Room")
+dressingRoom = DEMO_HOUSE.register_room(first_floor, 4.0, "dressing Room")
 Masterbedroom = DEMO_HOUSE.register_room(first_floor, 17.0, "Master bedroom")
 
 #devices
 
-
-#test = DEMO_HOUSE.register_deviceType("cd5be4e8-0e6b-4cb5-a21f-819d06cf5fc5", "NebulaGuard Innovations", "MoveZ Detect 69", "Motion Sensor", "Motion sensor")
 
 motion_sensor = sensor("cd5be4e8-0e6b-4cb5-a21f-819d06cf5fc5", "NebulaGuard Innovations", "MoveZ Detect 69", "Motion Sensor", "Motion sensor",LivingRoomKitchen,"motion")
 DEMO_HOUSE.register_device(LivingRoomKitchen, motion_sensor)
@@ -50,7 +48,6 @@ DEMO_HOUSE.register_device(guestRoom1, smart_oven1)
 Automatic_garage_door = actuator("9a54c1ec-0cb5-45a7-b20d-2a7349f1b132", "MythicalTech", "Guardian Lock 9000","actuator","Automatic Garage Door",garage,False)
 DEMO_HOUSE.register_device(garage, Automatic_garage_door)
 
-
 smart_oven2 = actuator("c1e8fa9c-4b8d-487a-a1a5-2b148ee9d2d1", "IgnisTech Solutions", "Ember Heat 3000","actuator","Smart oven",Masterbedroom,False)
 DEMO_HOUSE.register_device(Masterbedroom, smart_oven2)
 
@@ -71,9 +68,5 @@ Light_bulp = actuator("6b1c5f6b-37f6-4e3d-9145-1cfbe2f1fc28", "Elysian Tech", "L
 DEMO_HOUSE.register_device(guestRoom2, Light_bulp)
 
 
-
-
-
 #SmartLock = DEMO_HOUSE.register_device(entrance, smartlock )
 # TODO: continue registering the remaining floor, rooms and devices
-

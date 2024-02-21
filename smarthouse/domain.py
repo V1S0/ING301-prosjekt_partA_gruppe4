@@ -1,5 +1,6 @@
 from multiprocessing import Value
 from pickle import TRUE
+from sqlite3 import Timestamp
 from typing import Optional
 
 
@@ -14,9 +15,7 @@ class measurement:
         self.unit = unit
 
 
-
-
-# TODO: Add your own classes here!d
+# TODO: Add your own classes here!
 
 
 class SmartHouse:
@@ -28,16 +27,12 @@ class SmartHouse:
     The SmartHouse class provides functionality to register rooms and floors (i.e. changing the 
     house's physical layout) as well as register and modify smart devices and their state.
     """
-    #def __init__(self,floors:[],rooms:[]) -> None:
-    # self.floors = floors
-    #self.rooms = rooms
+
     def __init__(self):
 
         self.floors = []
         self.rooms = []
-    #devices = {"Room":[],"Device":[]}
         self.devices = []
-    #deviceTypes = {}
 
 
     def register_floor(self, level):#funker
@@ -66,10 +61,8 @@ class SmartHouse:
         registered a basement (level=0), a ground floor (level=1) and a first floor 
         (leve=1), then the resulting list contains these three flors in the above order.
         """
-        #tror sort sorterer listen og returnere none. dermed trenger den ikke å få en variabel
-        #sorted_floors = SmartHouse.floors.sort()
-        self.floors.sort()
 
+        self.floors.sort()
 
         return self.floors
 
@@ -101,34 +94,17 @@ class SmartHouse:
         """
         This methods registers a given device in a given room.
         """
-        ##prøver å fjerne enheten om vi legger til en enhet som allerede finnes
-     
-        ##checking if the device exists
-        #SmartHouse.devices.append(room, device)
         for old in self.devices:
             if old.id == device.id:
+                r = old.room
                 self.devices.remove(old)
+                r.devices.remove(old)
 
-                return old
-            
-
-        
-        #room.devices.remove(device)
         device.room = room
         
-
         self.devices.append(device)
-        room.devices.append(device) ###fiiiiikskskssk
+        room.devices.append(device) 
 
-        #SmartHouse.devices["Room"].append(room)
-        #SmartHouse.devices["Device"].append(device)
-
-    
-    #def register_deviceType(self, ID, supplier,model_name, devicetype, nickname):
-        """
-        This methods registers a given device in a given room.
-        """
-        #SmartHouse.deviceTypes.append(ID, supplier,model_name, devicetype, nickname)
 
 
     def get_devices(self):
@@ -146,29 +122,6 @@ class SmartHouse:
                     return device 
                 
 
-
-#for device in self.devices[]:
-#    if device.ID == device_id:  # Juster dette hvis strukturen er annerledes
-        # Returner enheten hvis ID-en matcher
-#        return device 
-
-# Returner None hvis ingen enhet med gitt ID ble funnet
-# return None
-
-
-    
-   # def get_device_by_id(self, device_id):
-    #    """
-     #   This method retrieves a device object via its id.
-      #  """
-       # for noe in SmartHouse.devices:
-        #    if noe.device.device_id == device_id:
-         #       return noe.device
-          #  else:
-           #     return print("ingen enheter med denne id")
-
-
-
 class building:
     def __init__(self,floors:[],rooms:[]) -> None:
         self.floors = floors
@@ -181,8 +134,6 @@ class floor:
     def __init__(self,floorNumber : int, ):
         self.floorNumber = floorNumber
 
-    #def calculateArea(self, SmartHouse.rooms):
-        
         
 
 class room:
@@ -191,8 +142,7 @@ class room:
         self.area = area
         self.floor = floor
         self.devices = []
-        #listname = "devices_in_"+ name
-        #listname[]
+
 
        
 
@@ -204,6 +154,9 @@ class Device:
         self.device_type = device_type
         self.nickname = nickname
         self.room = room
+
+    def get_device_type(self):
+        return self.device_type
         
 
 class actuator(Device):
@@ -216,11 +169,7 @@ class actuator(Device):
         return False
     def is_actuator(self):
         return True
-    def changeState(newState):
-        #.......
-        pass
 
-    
     def turn_on(self,value=None):
         self.state = True
         self.value = value
@@ -249,8 +198,9 @@ class sensor(Device):
 
         
     def addMeasurement(self,value,unit):
+        t = Timestamp.now()
 
-        self.measurements.append(measurement("now",value, unit))
+        self.measurements.append(measurement(t,value, unit))
 
     def getHistory(self):
         return self.measurements
@@ -262,7 +212,6 @@ class sensor(Device):
 
 
 
-        
 
     
 
